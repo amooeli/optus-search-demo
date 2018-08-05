@@ -29,7 +29,8 @@ public class TextCounterImpl implements TextCounter {
                 int cnt = StringUtils.countOccurrencesOf(l, s.toLowerCase());
 
                 Long val = Long.valueOf(cnt);
-                if(countResponseEntity.getCounts().containsKey(s)) {
+                //Increment count, if already in the map
+                if (countResponseEntity.getCounts().containsKey(s)) {
                     val = Long.valueOf(countResponseEntity.getCounts().get(s).intValue() + cnt);
                 }
                 countResponseEntity.getCounts().put(s, val);
@@ -44,6 +45,8 @@ public class TextCounterImpl implements TextCounter {
         Objects.requireNonNull(source, "Source cannot be null");
 
         if (topCount < 1 || source.isEmpty()) {
+            //Maybe we could throw an exception here?
+            logger.warn("Top count can't be less than 1 and source list can't be empty.");
             return "";
         }
 
@@ -52,6 +55,7 @@ public class TextCounterImpl implements TextCounter {
 
             Arrays.stream(l.replaceAll("[,.;]", "").split(" ")).forEach(word -> {
                 Long val = 1L;
+                //Increment count, if already in the map
                 if (countResponseEntity.getCounts().containsKey(word)) {
                     val = countResponseEntity.getCounts().get(word) + 1;
                 }

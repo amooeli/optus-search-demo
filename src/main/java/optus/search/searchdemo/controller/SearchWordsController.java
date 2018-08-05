@@ -30,7 +30,7 @@ public class SearchWordsController {
     private TextCounter textCounter;
 
     @RequestMapping(value = {"/search"}, method = {RequestMethod.POST}, headers = {"Accept=application/json"})
-    public ResponseEntity<CountResponseEntity> countText(@RequestBody SearchRequestBody searchText) throws GeneralException {
+    public ResponseEntity<CountResponseEntity> countWords(@RequestBody SearchRequestBody searchText) throws GeneralException {
         logger.info("searchText is => {}", searchText);
         CountResponseEntity countResponseEntity = textCounter.findWordsCount(searchText.getSearchText(),
                 MyResourceLoader.getContent(true));
@@ -40,9 +40,10 @@ public class SearchWordsController {
 
     @RequestMapping(value = {"/top/{topCount}"}, method = {RequestMethod.GET})
     @ResponseBody
-    public String topText(@PathVariable("topCount") int topCount) throws GeneralException {
-        logger.info("Top texts count is => {}", topCount);
-        return textCounter.findWordsTopCount(topCount, MyResourceLoader.getContent(true))
-                .replaceAll(",", "\n");
+    public String topWords(@PathVariable("topCount") int topCount) throws GeneralException {
+        logger.info("Top words count is => {}", topCount);
+        return textCounter.findWordsTopCount(topCount, MyResourceLoader.getContent(true));
+        //Could be uncommented for displaying purposes
+        // .replaceAll(",", "\n");
     }
 }
