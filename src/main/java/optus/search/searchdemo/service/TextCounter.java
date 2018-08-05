@@ -4,6 +4,9 @@ import optus.search.searchdemo.entity.CountResponseEntity;
 
 import java.util.List;
 
+/**
+ * @author ali.
+ */
 public interface TextCounter {
 
     /**

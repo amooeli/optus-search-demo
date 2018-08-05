@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/**
+ * @author ali.
+ */
 @Service
 public class TextCounterImpl implements TextCounter {
 
@@ -19,6 +22,7 @@ public class TextCounterImpl implements TextCounter {
         logger.debug("in findWordsCount method...");
         Objects.requireNonNull(searchTexts, "Search text cannot be null");
         Objects.requireNonNull(source, "Source cannot be null");
+
         CountResponseEntity countResponseEntity = new CountResponseEntity();
         source.forEach(l -> {
             searchTexts.forEach(s -> {
@@ -39,7 +43,7 @@ public class TextCounterImpl implements TextCounter {
         logger.debug("in findWordsTopCount...");
         Objects.requireNonNull(source, "Source cannot be null");
 
-        if (topCount < 1) {
+        if (topCount < 1 || source.isEmpty()) {
             return "";
         }
 

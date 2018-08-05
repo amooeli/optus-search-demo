@@ -2,6 +2,9 @@ package optus.search.searchdemo.entity;
 
 import java.util.List;
 
+/**
+ * @author ali.
+ */
 public class SearchRequestBody {
 
     private List<String> searchText;

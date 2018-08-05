@@ -3,6 +3,7 @@ package optus.search.searchdemo.service;
 import java.util.ArrayList;
 import java.util.List;
 import optus.search.searchdemo.entity.CountResponseEntity;
+import optus.search.searchdemo.exception.GeneralException;
 import optus.search.searchdemo.util.MyResourceLoader;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * @author ali.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TextCounterTest {
@@ -19,7 +23,7 @@ public class TextCounterTest {
     private TextCounter textCounter;
 
     @Test
-    public final void testFindText() {
+    public final void testFindText() throws GeneralException {
         List<String> searchTexts = new ArrayList();
         searchTexts.add("Duis");
         searchTexts.add("Sed");
@@ -27,7 +31,8 @@ public class TextCounterTest {
         searchTexts.add("Augue");
         searchTexts.add("Pellentesque");
         searchTexts.add("123");
-        CountResponseEntity countResponseEntity = this.textCounter.findWordsCount(searchTexts, MyResourceLoader.getContent(true));
+        CountResponseEntity countResponseEntity = this.textCounter.findWordsCount(searchTexts,
+                MyResourceLoader.getContent(true));
         Assert.assertNotNull(countResponseEntity);
         Assert.assertEquals(11L, (long)((Long)countResponseEntity.getCounts().get("Duis")).intValue());
         Assert.assertEquals(16L, (long)((Long)countResponseEntity.getCounts().get("Sed")).intValue());

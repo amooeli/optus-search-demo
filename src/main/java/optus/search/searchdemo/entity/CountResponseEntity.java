@@ -3,6 +3,9 @@ package optus.search.searchdemo.entity;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author ali.
+ */
 public class CountResponseEntity {
 
     private Map<String, Long> counts = new HashMap<>();

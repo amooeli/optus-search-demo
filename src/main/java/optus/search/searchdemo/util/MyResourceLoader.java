@@ -1,7 +1,6 @@
 package optus.search.searchdemo.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import optus.search.searchdemo.exception.GeneralException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,10 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * @author ali.
+ */
 public class MyResourceLoader {
-    private static final Logger logger = LoggerFactory.getLogger(MyResourceLoader.class);
 
-    public static List<String> getContent(boolean toLower) {
+    /**
+     * Load the resource file.
+     *
+     * @param toLower If true, will lower case the content.
+     * @return The content as a list.
+     */
+    public static List<String> getContent(boolean toLower) throws GeneralException {
 
         List data = new ArrayList();
         try {
@@ -24,7 +31,7 @@ public class MyResourceLoader {
             lines.forEach(line -> data.add(toLower ? line.toLowerCase() : line));
             lines.close();
         } catch (IOException | URISyntaxException e) {
-            logger.error("Cannot load resource due to => {}", e.getLocalizedMessage());
+            throw new GeneralException("Cannot load resource due to => " + e.getLocalizedMessage(), e);
         }
         return data;
     }

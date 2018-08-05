@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+/**
+ * @author ali.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityAdapter extends WebSecurityConfigurerAdapter {
